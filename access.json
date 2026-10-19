@@ -1,0 +1,1 @@
+{"internal_read_roles":["analyst","admin"],"roles":{"admin":["search_notes","read_note","log_access"],"analyst":["search_notes","read_note","log_access"],"viewer":["search_notes","read_note"]}}

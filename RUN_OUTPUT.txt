@@ -1,0 +1,22 @@
+Week 1 MCP server: client test transcript
+Server: server.py over stdio transport, official MCP Python SDK
+
+== Run: role=analyst ==
+  tools: search_notes, read_note, log_access
+  [OK] search_notes('gateway'): [   {     "id": "n4",     "title": "Gateway routing rule",     "classification": "public"   } ]
+  [OK] read_note('n3') internal: {   "body": "Internal notes on target pay bands. Do not share outside the team.",   "classification": "internal",   "id": "n3",   "tags": [     "internal",     "career"   ],   "title": "Salary band research" }
+  [OK] log_access('client test run'): logged: client test run
+
+== Run: role=viewer ==
+  tools: search_notes, read_note, log_access
+  [OK] search_notes('gateway'): [   {     "id": "n4",     "title": "Gateway routing rule",     "classification": "public"   } ]
+  [ERROR] read_note('n3') internal: Error executing tool read_note: DENIED: note n3 is internal and role 'viewer' cannot read internal notes
+  [ERROR] log_access('client test run'): Error executing tool log_access: DENIED: role 'viewer' may not call log_access
+
+== audit.log after both runs ==
+2026-10-19T00:12:38+00:00 role=analyst tool=search_notes decision=ALLOW query='gateway' hits=1
+2026-10-19T00:12:38+00:00 role=analyst tool=read_note decision=ALLOW note=n3
+2026-10-19T00:12:38+00:00 role=analyst tool=log_access decision=ALLOW entry='client test run'
+2026-10-19T00:12:39+00:00 role=viewer tool=search_notes decision=ALLOW query='gateway' hits=1
+2026-10-19T00:12:39+00:00 role=viewer tool=read_note decision=DENY reason=note n3 is internal, role viewer cannot read internal
+2026-10-19T00:12:39+00:00 role=viewer tool=log_access decision=DENY reason=role viewer may not call log_access
