@@ -6,6 +6,8 @@ read as a test list.
 
 Full roadmap: https://jesunahmadushno.com/roadmap/infuse-ai-engineer/
 
+Live dashboard: https://jesunahmadushno.github.io/pattern19-wk1-mcp-server/
+
 ## The Week 1 brief
 
 Post line it answers: build and maintain MCP servers and tool layers
@@ -48,6 +50,9 @@ behind it.
 | `client_test.py` | A real MCP client. Connects over stdio, lists the tools, calls all three as `analyst`, then again as `viewer`. |
 | `RUN_OUTPUT.txt` | The captured test transcript, including both denied calls and the audit log. |
 | `requirements.txt` | One dependency: the MCP Python SDK, pinned to the v1 line. |
+| `tests/test_server.py` | Assertion tests for the gate (standard library only). Fail if a decision changes. |
+| `site/` | The live dashboard. Its build replays the client test through a browser port of the gate and fails on any drift from `RUN_OUTPUT.txt`. |
+| `docs/research-review.md` | An honest grading of this example and its open gaps. |
 
 ## Run it
 
@@ -66,6 +71,12 @@ MCP_CALLER_ROLE=analyst python server.py
 
 Then connect any MCP client over stdio. Point the client at
 `server.py`, and set `MCP_CALLER_ROLE` in the server environment.
+
+Check the gate with assertions (no SDK needed):
+
+```bash
+python -m unittest discover -s tests -v
+```
 
 ## Real run output
 
