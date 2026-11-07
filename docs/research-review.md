@@ -58,7 +58,7 @@ otherwise explained in the repo.
 
 | Gap | Why it matters | What closing it needs |
 | --- | --- | --- |
-| Log injection in `access.log` | `log_access` writes the entry raw; a newline forges a line that looks like another role wrote it. `audit.log` is safe (it uses `repr`). | A one-line change in `server.py` (escape or reject newlines), a test, and a re-captured `RUN_OUTPUT.txt` in the same commit. Owner decision, since it changes the recorded artifact. No compute. |
+| Log injection in `access.log` | `log_access` writes the entry raw; a newline fakes a line that looks like another role wrote it. `audit.log` is safe (it uses `repr`). | A one-line change in `server.py` (escape or reject newlines), a test, and a re-captured `RUN_OUTPUT.txt` in the same commit. Owner decision, since it changes the recorded artifact. No compute. |
 | Existence oracle | `read_note` tells a viewer that an internal id exists; unknown ids get a different message, while search hides internal notes silently. | A policy decision (disclose or not), then a matching message and test. No compute. |
 | Not-found logged as DENY | Audit counts mix authorization failures with missing records. | A separate decision value (for example `NOT_FOUND`) and an updated transcript. No compute. |
 | Identity from an environment variable | No authentication, no per-request identity, role fixed per process. | MCP authorization (OAuth-based) on an HTTP transport, or a signed token per request. A Week 2+ build, not a patch. |

@@ -165,7 +165,7 @@ const PRESETS = [
   { name: 'Viewer searches “internal”', role: 'viewer', tool: 'search_notes', arg: 'internal' },
   { name: 'Analyst searches “internal”', role: 'analyst', tool: 'search_notes', arg: 'internal' },
   { name: 'Admin reads a missing id', role: 'admin', tool: 'read_note', arg: 'n99' },
-  { name: 'Log entry with a newline', role: 'analyst', tool: 'log_access', arg: 'ok\nrole=admin entry=forged' },
+  { name: 'Log entry with a newline', role: 'analyst', tool: 'log_access', arg: 'ok\nrole=admin entry=spoofed' },
 ];
 
 function Playground() {
@@ -356,7 +356,7 @@ function Gaps() {
   const gaps = [
     ['Identity is an environment variable', 'MCP_CALLER_ROLE is fixed per server process. There is no authentication and no per-request identity; the README says so.', 'warn'],
     ['The transcript test only prints', 'client_test.py exits 0 even if a denial wrongly succeeds. tests/test_server.py now asserts the decisions, including the paths the transcript skipped.', 'good'],
-    ['Log injection on access.log', 'log_access writes the entry raw, so a newline forges an extra line (see the playground example). audit.log uses repr and is safe.', 'bad'],
+    ['Log injection on access.log', 'log_access writes the entry raw, so a newline fakes an extra line (see the playground example). audit.log uses repr and is safe.', 'bad'],
     ['Existence is disclosed', 'read_note says an internal id exists; an unknown id gets a different message. Search hides internal notes silently. The policy should pick one.', 'warn'],
     ['Not-found is logged as DENY', 'A missing id is a DENY in audit.log, which mixes authorization failures with missing records.', 'warn'],
     ['One recorded run', 'The committed transcript is a single run and the dependency is a range (mcp>=1.2,<2) with no lockfile. The research review records a later re-run and what a pinned setup still needs.', 'warn'],
