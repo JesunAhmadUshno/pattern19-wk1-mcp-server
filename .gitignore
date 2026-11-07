@@ -2,3 +2,6 @@
 __pycache__/
 audit.log
 access.log
+site/node_modules/
+site/dist/
+site/.rubric/
