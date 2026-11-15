@@ -75,7 +75,7 @@ function Dock() {
 export default function App() {
   useReveal();
   return (
-    <div className="wrap">
+    <div className="wrap"><a className="skip" href="#top">Skip to content</a>
       <MenuBar />
       <div className="glow" aria-hidden="true" />
       <Hero />
@@ -90,7 +90,7 @@ export default function App() {
       <footer>
         Every number on this page is read at build time from <code>access.json</code>, <code>data/notes.json</code>, <code>server.py</code> and <code>RUN_OUTPUT.txt</code>.
         The playground is a browser port of the gate in <code>server.py</code>, checked line for line against the recorded run. <a href={REPO} style={{ color: 'inherit' }}>Source on GitHub</a>.
-      </footer>
+      <nav className="support" aria-label="Support this work"><a href="https://github.com/sponsors/JesunAhmadUshno">Sponsor this work</a><a href="https://github.com/sponsors/JesunAhmadUshno">Donate</a><a href="https://buymeacoffee.com/jesun">Buy Me a Coffee</a><a href="https://calendly.com/jesunahmadushno/30min">Work with me</a></nav></footer>
     </div>
   );
 }
@@ -98,7 +98,7 @@ export default function App() {
 function Hero() {
   const done = matched === rows.length && denies.length > 0;
   return (
-    <header className="card hero window" id="top" data-title="wk1-notes — server.py">
+    <header className="card hero window" id="top" data-title="wk1-notes - server.py">
       <div className="head">
         <p className="eyebrow">INFUSE roadmap · Week 1 worked example</p>
         <span className={`pill ${done ? 'good' : 'bad'}`}>● {done ? 'Done test met' : 'Done test not met'}</span>
@@ -183,7 +183,7 @@ function Playground() {
   };
   const preset = (p) => { setRole(p.role); setTool(p.tool); setArg(p.arg); run(p.role, p.tool, p.arg); };
   return (
-    <section id="gate" className="card window reveal" data-title="gate-sim — MCP_CALLER_ROLE (browser port)">
+    <section id="gate" className="card window reveal" data-title="gate-sim - MCP_CALLER_ROLE (browser port)">
       <div className="head">
         <div>
           <p className="eyebrow">Live in your browser</p>
@@ -269,7 +269,7 @@ function Replay() {
   const r = rows[i];
   const id = useId();
   return (
-    <section id="replay" className="card window reveal" data-title={`RUN_OUTPUT.txt — recorded ${CAPTURED}, unedited`}>
+    <section id="replay" className="card window reveal" data-title={`RUN_OUTPUT.txt - recorded ${CAPTURED}, unedited`}>
       <div className="head">
         <div>
           <p className="eyebrow">Recorded replay</p>
@@ -362,7 +362,7 @@ function Gaps() {
     ['One recorded run', 'The committed transcript is a single run and the dependency is a range (mcp>=1.2,<2) with no lockfile. The research review records a later re-run and what a pinned setup still needs.', 'warn'],
   ];
   return (
-    <section id="gaps" className="card window reveal" data-title="README.md — gaps and next step">
+    <section id="gaps" className="card window reveal" data-title="README.md - gaps and next step">
       <p className="eyebrow">Limits and threats</p>
       <h2>What this example does <em>not</em> prove.</h2>
       <p className="sub">It meets its own done test. It is a teaching example, not a hardened server. The full grading is in <a href={blob('docs/research-review.md')}>docs/research-review.md</a>.</p>
