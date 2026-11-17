@@ -1,0 +1,18 @@
+source:
+  - changed-files:
+      - any-glob-to-any-file: ["server.py", "client_test.py"]
+tests:
+  - changed-files:
+      - any-glob-to-any-file: ["tests/**"]
+data:
+  - changed-files:
+      - any-glob-to-any-file: ["data/**"]
+site:
+  - changed-files:
+      - any-glob-to-any-file: ["site/**"]
+automation:
+  - changed-files:
+      - any-glob-to-any-file: [".github/**"]
+docs:
+  - changed-files:
+      - any-glob-to-any-file: ["docs/**", "README.md"]
